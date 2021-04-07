@@ -15,6 +15,7 @@ import About from "./components/About"
 import Terms from "./components/Terms"
 import Home from "./components/Home"
 import CreatePost from "./components/CreatePost"
+import ViewSinglePost from "./components/ViewSinglePost"
 
 function Main() {
   //"Lifting" the state to a higher level comp
@@ -29,6 +30,9 @@ function Main() {
             //if logged in it displays home component
             loggedIn ? <Home /> : <HomeGuest />
           }
+        </Route>
+        <Route path="/post/:id">
+          <ViewSinglePost />
         </Route>
         <Route path="/create-post">
           <CreatePost />
