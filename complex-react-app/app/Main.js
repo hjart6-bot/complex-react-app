@@ -17,6 +17,7 @@ import Home from "./components/Home"
 import CreatePost from "./components/CreatePost"
 import ViewSinglePost from "./components/ViewSinglePost"
 import FlashMessages from "./components/FlashMessages"
+import ExampleContext from "./ExampleContext"
 
 function Main() {
   //"Lifting" the state to a higher level comp
@@ -29,31 +30,33 @@ function Main() {
   }
 
   return (
-    <BrowserRouter>
-      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-      <FlashMessages messages={flashMessages} />
-      <Switch>
-        <Route path="/" exact>
-          {
-            //if logged in it displays home component
-            loggedIn ? <Home /> : <HomeGuest />
-          }
-        </Route>
-        <Route path="/post/:id">
-          <ViewSinglePost />
-        </Route>
-        <Route path="/create-post">
-          <CreatePost addFlashMessage={addFlashMessage} />
-        </Route>
-        <Route path="/about-us">
-          <About />
-        </Route>
-        <Route path="/terms">
-          <Terms />
-        </Route>
-      </Switch>
-      <Footer />
-    </BrowserRouter>
+    <ExampleContext.Provider value={{ addFlashMessage, setLoggedIn }}>
+      <BrowserRouter>
+        <Header loggedIn={loggedIn} />
+        <FlashMessages messages={flashMessages} />
+        <Switch>
+          <Route path="/" exact>
+            {
+              //if logged in it displays home component
+              loggedIn ? <Home /> : <HomeGuest />
+            }
+          </Route>
+          <Route path="/post/:id">
+            <ViewSinglePost />
+          </Route>
+          <Route path="/create-post">
+            <CreatePost />
+          </Route>
+          <Route path="/about-us">
+            <About />
+          </Route>
+          <Route path="/terms">
+            <Terms />
+          </Route>
+        </Switch>
+        <Footer />
+      </BrowserRouter>
+    </ExampleContext.Provider>
   )
 }
 
