@@ -39,22 +39,16 @@ function Main() {
   }
 
   const [state, dispatch] = useReducer(ourReducer, initialState)
-  dispatch({ type: "login" })
-  dispatch({ type: "logout" })
-  dispatch({ type: "flashMessage", value: "Congrats!" })
 
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
         <BrowserRouter>
-          <Header />
           <FlashMessages messages={state.flashMessages} />
+          <Header />
           <Switch>
             <Route path="/" exact>
-              {
-                //if logged in it displays home component
-                state.loggedIn ? <Home /> : <HomeGuest />
-              }
+              {state.loggedIn ? <Home /> : <HomeGuest />}
             </Route>
             <Route path="/post/:id">
               <ViewSinglePost />
