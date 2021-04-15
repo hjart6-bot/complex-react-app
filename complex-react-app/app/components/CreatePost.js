@@ -9,7 +9,6 @@ function CreatePost(props) {
   const [title, setTitle] = useState()
   const [body, setBody] = useState()
   const appDispatch = useContext(DispatchContext)
-  const appDispatch = useContext(StateContext)
 
   async function handleSubmit(e) {
     e.preventDefault()
