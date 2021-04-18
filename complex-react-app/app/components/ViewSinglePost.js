@@ -60,7 +60,7 @@ function ViewSinglePost() {
       </p>
 
       <div className="body-content">
-        <ReactMarkDown children={post.body} />
+        <ReactMarkdown source={post.body} allowedTypes={["paragraph", "strong", "emphasis", "text", "heading", "list", "listItem"]} />
       </div>
     </Page>
   )
