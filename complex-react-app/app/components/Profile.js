@@ -19,15 +19,20 @@ function Profile() {
   //first here is a funct, other is a list of dependencies
   //the function only runs the first time it is rendered with an empty array []
   useEffect(() => {
+    const ourRequest = Axios.CancelToken.source()
+
     async function fetchData() {
       try {
-        const response = await Axios.post(`/profile/${username}`, { token: appState.user.token })
+        const response = await Axios.post(`/profile/${username}`, { cancelToken: ourRequest.token, token: appState.user.token })
         setProfileData(response.data)
       } catch (e) {
         console.log("There was a problem.")
       }
     }
     fetchData()
+    return () => {
+      ourRequest.cancel()
+    }
   }, [])
 
   return (
