@@ -5,7 +5,7 @@ function Page(props) {
   useEffect(() => {
     document.title = `${props.title} | ComplexApp`
     window.scrollTo(0, 0)
-  }, [])
+  }, [props.title])
   //[] tells react to only run this the first time component is rendered
 
   return <Container wide={props.wide}>{props.children}</Container>
